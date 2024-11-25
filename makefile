@@ -13,8 +13,8 @@ all: displayCompilation $(EXEC) run-tests code-analysis list-todo
 
 $(EXEC): $(SRC) makefile
 	go mod tidy
-	go fmt $(SRC_FILES)
-	go build -o $@ $(SRC)
+	go fmt ./...
+	go build -o . ./...
 
 displayCompilation:
 	@echo "${_RED}  --COMPILATION ${_END}"
