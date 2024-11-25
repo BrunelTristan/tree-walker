@@ -28,6 +28,7 @@ clear: clean
 	
 run-tests: $(TST_FILES)
 	@echo "${_RED}  --LAUNCH TESTS ${_END}"
+	go mod tidy
 	go test -cover -v ./...
 	go test -bench=. ./...
 
