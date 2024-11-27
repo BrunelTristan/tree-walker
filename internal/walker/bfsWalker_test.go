@@ -6,7 +6,7 @@ import (
 	"tree-walker/model/tree"
 )
 
-func TestWalk(t *testing.T) {
+func TestWalkOnEmptyTree(t *testing.T) {
 	walker := BfsWalker{}
 
 	unexploredTree := tree.Tree{}
@@ -15,5 +15,5 @@ func TestWalk(t *testing.T) {
 
 	path := walker.Walk(unexploredTree, rootNode, leafNode)
 
-	assert.Empty(t, path)
+	assert.Empty(t, path, "Should not found any path")
 }
