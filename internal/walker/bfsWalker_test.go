@@ -9,7 +9,11 @@ import (
 func TestWalk(t *testing.T) {
 	walker := BfsWalker{}
 
-	tree := tree.Tree{}
+	unexploredTree := tree.Tree{}
+	rootNode := tree.Node{}
+	leafNode := tree.Node{}
 
-	walker.Walk(tree)
+	path := walker.Walk(unexploredTree, rootNode, leafNode)
+
+	assert.Empty(t, path)
 }

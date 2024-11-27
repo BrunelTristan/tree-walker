@@ -5,5 +5,5 @@ import (
 )
 
 type IWalker interface {
-	Walk(tree tree.Tree)
+	Walk(unexploredTree tree.Tree, start tree.Node, target tree.Node) tree.Path
 }

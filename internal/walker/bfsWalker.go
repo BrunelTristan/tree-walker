@@ -7,6 +7,6 @@ import (
 type BfsWalker struct {
 }
 
-func (w BfsWalker) Walk(tree tree.Tree) {
-
+func (w BfsWalker) Walk(unexploredTree tree.Tree, start tree.Node, target tree.Node) tree.Path {
+	return tree.Path{}
 }
