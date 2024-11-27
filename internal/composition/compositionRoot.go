@@ -11,6 +11,6 @@ func (c *CompositionRoot) Build() {
 
 }
 
-func (c *CompositionRoot) ComposeWalker() *walker.IWalker {
-	return new(walker.IWalker)
+func (c *CompositionRoot) composeWalker() walker.IWalker {
+	return new(walker.BfsWalker)
 }
