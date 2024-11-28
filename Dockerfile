@@ -3,6 +3,8 @@
 FROM alpine:3.20.1 As socle
 
 RUN apk add go
+ENV GOPATH="/go"
+ENV PATH="$PATH:$GOPATH/bin"
 
 WORKDIR /src
 
@@ -16,6 +18,8 @@ RUN apk add make
 WORKDIR /usr/lib/go
 RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.62.0
 RUN ln -s /usr/lib/go/bin/golangci-lint /usr/bin/golangci-lint
+
+RUN go install go.uber.org/mock/mockgen@latest
 
 WORKDIR /src
 
