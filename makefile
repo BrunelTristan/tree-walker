@@ -6,7 +6,7 @@ SRC_FILES=$(wildcard $(SRCDIR)/*/*/*.go $(SRCDIR)/*/*.go $(SRCDIR)/*.go)
 SRC1= $(filter-out $(wildcard $(SRCDIR)/*_test.go), $(SRC_FILES))
 SRC2= $(filter-out $(wildcard $(SRCDIR)/*/*_test.go), $(SRC1))
 SRC= $(filter-out $(wildcard $(SRCDIR)/*/*/*_test.go), $(SRC2))
-INTERFACE_FILES=$(wildcard $(SRCDIR)/*/*/i*.go $(SRCDIR)/*/i*.go $(SRCDIR)/i*.go)
+INTERFACE_FILES=$(wildcard $(SRCDIR)/*/*/i[A-Z]*.go $(SRCDIR)/*/i[A-Z]*.go $(SRCDIR)/i[A-Z]*.go)
 
 .PHONY: all clear 
 
