@@ -9,7 +9,7 @@ import (
 )
 
 func TestWalkOnEmptyTree(t *testing.T) {
-	walker := BfsWalker{}
+	walker := NewBfsWalker(nil)
 
 	unexploredTree := tree.Tree{}
 
@@ -19,43 +19,56 @@ func TestWalkOnEmptyTree(t *testing.T) {
 }
 
 func TestWalkOnMonoNodeTree(t *testing.T) {
-	walker := BfsWalker{}
+	walker := NewBfsWalker(nil)
 
-	rootNode := tree.Node{}
+	unexploredTree := tree.Tree{Nodes: []tree.Node{tree.Node{}}}
 
-	unexploredTree := tree.Tree{Nodes: []tree.Node{rootNode}}
+	rootNode := &unexploredTree.Nodes[0]
 
-	path := walker.Walk(&unexploredTree, &rootNode, &rootNode)
+	path := walker.Walk(&unexploredTree, rootNode, rootNode)
 
 	assert.NotEmpty(t, path, "Should found simple path")
 	assert.Len(t, path.Nodes, 1, "Should have path with only one node")
-	assert.Equal(t, &rootNode, path.Nodes[0], "Should have path with only root node")
+	assert.Equal(t, rootNode, path.Nodes[0], "Should have path with only root node")
 }
 
-func TestWalkOnWerySimpleTree(t *testing.T) {
+func TestWalkOnVerySimpleTree(t *testing.T) {
 	mockController := gomock.NewController(t)
 
-	/*neighborFinderMock :=*/
-	mock_treeHelpers.NewMockINeighborFinder(mockController)
+	neighborFinderMock := generatedMocks.NewMockINeighborFinder(mockController)
 
-	walker := BfsWalker{}
-
-	rootNode := tree.Node{}
-	firstNode := tree.Node{}
-	secondNode := tree.Node{}
-	lastNode := tree.Node{}
+	walker := NewBfsWalker(neighborFinderMock)
 
 	unexploredTree := tree.Tree{
 		Nodes: []tree.Node{
-			rootNode,
-			firstNode,
-			secondNode,
-			lastNode},
-		Links: []tree.Link{
-			tree.Link{Nodes: [2]*tree.Node{&rootNode, &firstNode}},
-			tree.Link{Nodes: [2]*tree.Node{&rootNode, &secondNode}},
-			tree.Link{Nodes: [2]*tree.Node{&secondNode, &lastNode}},
-		}}
+			tree.Node{ID: 0},
+			tree.Node{ID: 1},
+			tree.Node{ID: 3},
+			tree.Node{ID: 5},
+		},
+	}
 
-	walker.Walk(&unexploredTree, &rootNode, &lastNode)
+	rootNode := &unexploredTree.Nodes[0]
+	firstNode := &unexploredTree.Nodes[1]
+	secondNode := &unexploredTree.Nodes[2]
+	lastNode := &unexploredTree.Nodes[3]
+
+	neighborFinderMock.
+		EXPECT().
+		GetNeighbors(&unexploredTree, rootNode).
+		Return([]*tree.Node{firstNode, secondNode})
+	neighborFinderMock.
+		EXPECT().
+		GetNeighbors(&unexploredTree, firstNode).
+		Return([]*tree.Node{rootNode})
+	neighborFinderMock.
+		EXPECT().
+		GetNeighbors(&unexploredTree, secondNode).
+		Return([]*tree.Node{rootNode, lastNode})
+	neighborFinderMock.
+		EXPECT().
+		GetNeighbors(&unexploredTree, lastNode).
+		Return([]*tree.Node{secondNode})
+
+	walker.Walk(&unexploredTree, rootNode, lastNode)
 }

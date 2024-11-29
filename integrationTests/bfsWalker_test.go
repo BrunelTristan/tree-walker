@@ -1,14 +1,17 @@
 package integrationTest
 
+
 import (
+
 	//"github.com/stretchr/testify/assert"
 	"testing"
-	"tree-walker/internal/walker"
-	"tree-walker/model/tree"
+	//"tree-walker/internal/walker"
+	//"tree-walker/model/tree"
+
 )
 
 func TestWalkOnWerySimpleTree(t *testing.T) {
-	walker := walker.BfsWalker{}
+	/*walker := walker.BfsWalker{}
 
 	rootNode := tree.Node{}
 	firstNode := tree.Node{}
@@ -27,8 +30,7 @@ func TestWalkOnWerySimpleTree(t *testing.T) {
 			tree.Link{Nodes: [2]*tree.Node{&secondNode, &lastNode}},
 		}}
 
-	/*path :=*/
-	walker.Walk(&unexploredTree, &rootNode, &lastNode)
+	path := walker.Walk(&unexploredTree, &rootNode, &lastNode)
 
 	/* TODO enable it when ready
 	assert.NotEmpty(t, path, "Should found simple path")
