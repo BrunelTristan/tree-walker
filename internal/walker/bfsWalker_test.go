@@ -65,10 +65,14 @@ func TestWalkOnVerySimpleTree(t *testing.T) {
 		EXPECT().
 		GetNeighbors(&unexploredTree, secondNode).
 		Return([]*tree.Node{rootNode, lastNode})
-	neighborFinderMock.
-		EXPECT().
-		GetNeighbors(&unexploredTree, lastNode).
-		Return([]*tree.Node{secondNode})
 
-	walker.Walk(&unexploredTree, rootNode, lastNode)
+	path := walker.Walk(&unexploredTree, rootNode, lastNode)
+
+	assert.NotEmpty(t, path, "Should found path")
+	assert.Len(t, path.Nodes, 3, "Should have path with three nodes")
+	if 3 == len(path.Nodes) {
+		assert.Equal(t, rootNode, path.Nodes[0], "Should have path starting with root node")
+		assert.Equal(t, secondNode, path.Nodes[1], "Should have path continuing with second node")
+		assert.Equal(t, lastNode, path.Nodes[2], "Should have path finishing with last node")
+	}
 }

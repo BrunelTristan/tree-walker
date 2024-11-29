@@ -1,13 +1,11 @@
 package integrationTest
 
-
 import (
 
 	//"github.com/stretchr/testify/assert"
 	"testing"
 	//"tree-walker/internal/walker"
 	//"tree-walker/model/tree"
-
 )
 
 func TestWalkOnWerySimpleTree(t *testing.T) {
