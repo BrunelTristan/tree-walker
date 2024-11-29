@@ -6,6 +6,7 @@ SRC_FILES=$(wildcard $(SRCDIR)/*/*/*.go $(SRCDIR)/*/*.go $(SRCDIR)/*.go)
 SRC1= $(filter-out $(wildcard $(SRCDIR)/*_test.go), $(SRC_FILES))
 SRC2= $(filter-out $(wildcard $(SRCDIR)/*/*_test.go), $(SRC1))
 SRC= $(filter-out $(wildcard $(SRCDIR)/*/*/*_test.go), $(SRC2))
+INTERFACE_FILES=$(wildcard $(SRCDIR)/*/*/i*.go $(SRCDIR)/*/i*.go $(SRCDIR)/i*.go)
 
 .PHONY: all clear 
 
@@ -25,10 +26,13 @@ code-analysis:
 
 clear: clean
 	rm -rf $(EXEC)
-	
-run-tests: $(TST_FILES)
+
+mock-generator: $(INTERFACE_FILES)
+	$(foreach interface, $^, mockgen -package=generatedMocks -source=./$(interface) -destination=./internal/generatedMocks/$(shell basename $(shell dirname $(interface)))-$(basename $(notdir $(interface)))Mock.go;)
+
+run-tests: mock-generator $(TST_FILES)
 	@echo "${_RED}  --LAUNCH TESTS ${_END}"
-	mockgen -source=./internal/treeHelpers/iNeighborFinder.go -destination=./internal/generatedMocks/TreeHelpersINeighborFinderMock.go
+	
 	go mod tidy
 	go test -cover -v ./...
 	go test -bench=. ./...
