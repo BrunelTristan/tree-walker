@@ -19,7 +19,7 @@ func (w BfsWalker) Walk(unexploredTree *tree.Tree, start *tree.Node, target *tre
 		return new(tree.Path)
 	}
 
-	alreadySeen := []*tree.Node{}
+	alreadySeen := []*tree.Node{start}
 	toWalk := []*tree.Path{&tree.Path{Nodes: []*tree.Node{start}}}
 
 	for len(toWalk) > 0 {
@@ -29,12 +29,12 @@ func (w BfsWalker) Walk(unexploredTree *tree.Tree, start *tree.Node, target *tre
 			return currentPath
 		}
 
-		alreadySeen = append(alreadySeen, currentNode)
 		neighbors := w.neighborsFinder.GetNeighbors(unexploredTree, currentNode)
 
 		for _, node := range neighbors {
 			if !(slices.Contains(alreadySeen, node)) {
 				toWalk = append(toWalk, &tree.Path{Nodes: append(currentPath.Nodes, node)})
+				alreadySeen = append(alreadySeen, node)
 			}
 		}
 
