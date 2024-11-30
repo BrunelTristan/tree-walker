@@ -15,7 +15,7 @@ func TestWalkOnEmptyTree(t *testing.T) {
 
 	path := walker.Walk(&unexploredTree, nil, nil)
 
-	assert.Empty(t, path, "Should not found any path")
+	assert.Empty(t, path, "Should not find any path")
 }
 
 func TestWalkOnMonoNodeTree(t *testing.T) {
@@ -27,7 +27,7 @@ func TestWalkOnMonoNodeTree(t *testing.T) {
 
 	path := walker.Walk(&unexploredTree, rootNode, rootNode)
 
-	assert.NotEmpty(t, path, "Should found simple path")
+	assert.NotEmpty(t, path, "Should find simple path")
 	assert.Len(t, path.Nodes, 1, "Should have path with only one node")
 	assert.Equal(t, rootNode, path.Nodes[0], "Should have path with only root node")
 }
@@ -68,7 +68,7 @@ func TestWalkOnVerySimpleTree(t *testing.T) {
 
 	path := walker.Walk(&unexploredTree, rootNode, lastNode)
 
-	assert.NotEmpty(t, path, "Should found path")
+	assert.NotEmpty(t, path, "Should find path")
 	assert.Len(t, path.Nodes, 3, "Should have path with three nodes")
 	if 3 == len(path.Nodes) {
 		assert.Equal(t, rootNode, path.Nodes[0], "Should have path starting with root node")
