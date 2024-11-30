@@ -15,16 +15,8 @@ func NewBfsWalker(neighborsFinder treeHelpers.INeighborFinder) *BfsWalker {
 }
 
 func (w BfsWalker) Walk(unexploredTree *tree.Tree, start *tree.Node, target *tree.Node) *tree.Path {
-	resultPath := new(tree.Path)
-
 	if start == nil || target == nil {
-		return resultPath
-	}
-
-	resultPath.Nodes = append(resultPath.Nodes, start)
-
-	if start == target {
-		return resultPath
+		return new(tree.Path)
 	}
 
 	alreadySeen := []*tree.Node{}
@@ -49,5 +41,5 @@ func (w BfsWalker) Walk(unexploredTree *tree.Tree, start *tree.Node, target *tre
 		toWalk = toWalk[1:]
 	}
 
-	return resultPath
+	return new(tree.Path)
 }
