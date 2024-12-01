@@ -16,7 +16,7 @@ func TestComposeWalker(t *testing.T) {
 
 	root.Build()
 
-	walker := root.composeWalker()
+	walker := root.ComposeWalker()
 
 	assert.NotNil(t, walker, "Should return built walker")
 }

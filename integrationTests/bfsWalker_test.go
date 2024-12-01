@@ -1,15 +1,18 @@
 package integrationTest
 
 import (
-
-	//"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
 	"testing"
-	//"tree-walker/internal/walker"
-	//"tree-walker/model/tree"
+	"tree-walker/internal/composition"
+	"tree-walker/model/tree"
 )
 
 func TestWalkOnWerySimpleTree(t *testing.T) {
-	/*walker := walker.BfsWalker{}
+	root := composition.NewCompositionRoot()
+
+	root.Build()
+
+	walker := root.ComposeWalker()
 
 	rootNode := tree.Node{}
 	firstNode := tree.Node{}
@@ -30,7 +33,6 @@ func TestWalkOnWerySimpleTree(t *testing.T) {
 
 	path := walker.Walk(&unexploredTree, &rootNode, &lastNode)
 
-	/* TODO enable it when ready
 	assert.NotEmpty(t, path, "Should found simple path")
 	assert.Len(t, path.Nodes, 3, "Should have path with only three node")
 	if 3 == len(path.Nodes) {
@@ -38,5 +40,4 @@ func TestWalkOnWerySimpleTree(t *testing.T) {
 		assert.Equal(t, &firstNode, path.Nodes[1], "Should have path with then first node")
 		assert.Equal(t, &lastNode, path.Nodes[2], "Should have path ended by last node")
 	}
-	*/
 }
