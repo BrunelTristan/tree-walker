@@ -8,6 +8,6 @@ import (
 func main() {
 	fmt.Println("WALK")
 
-	root := composition.CompositionRoot{}
+	root := composition.NewCompositionRoot()
 	root.Build()
 }

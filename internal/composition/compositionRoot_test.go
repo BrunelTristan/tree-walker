@@ -6,13 +6,15 @@ import (
 )
 
 func TestBuild(t *testing.T) {
-	root := CompositionRoot{}
+	root := NewCompositionRoot()
 
 	root.Build()
 }
 
 func TestComposeWalker(t *testing.T) {
-	root := CompositionRoot{}
+	root := NewCompositionRoot()
+
+	root.Build()
 
 	walker := root.composeWalker()
 
