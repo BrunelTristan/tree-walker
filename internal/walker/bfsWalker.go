@@ -33,7 +33,8 @@ func (w BfsWalker) Walk(unexploredTree *tree.Tree, start *tree.Node, target *tre
 
 		for _, node := range neighbors {
 			if !(slices.Contains(alreadySeen, node)) {
-				toWalk = append(toWalk, &tree.Path{Nodes: append(currentPath.Nodes, node)})
+				newPath := append([]*tree.Node{}, currentPath.Nodes...)
+				toWalk = append(toWalk, &tree.Path{Nodes: append(newPath, node)})
 				alreadySeen = append(alreadySeen, node)
 			}
 		}

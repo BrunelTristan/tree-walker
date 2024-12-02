@@ -20,3 +20,13 @@ func TestComposeWalker(t *testing.T) {
 
 	assert.NotNil(t, walker, "Should return built walker")
 }
+
+func TestComposeTree(t *testing.T) {
+	root := NewCompositionRoot()
+
+	root.Build()
+
+	christmasTree := root.ComposeTree()
+
+	assert.NotNil(t, christmasTree, "Should return built tree")
+}

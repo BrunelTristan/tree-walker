@@ -33,11 +33,25 @@ func TestWalkOnWerySimpleTree(t *testing.T) {
 
 	path := walker.Walk(&unexploredTree, &rootNode, &lastNode)
 
-	assert.NotEmpty(t, path, "Should found simple path")
+	assert.NotEmpty(t, path, "Should find simple path")
 	assert.Len(t, path.Nodes, 3, "Should have path with only three node")
 	if 3 == len(path.Nodes) {
 		assert.Equal(t, &rootNode, path.Nodes[0], "Should have path with root node")
 		assert.Equal(t, &firstNode, path.Nodes[1], "Should have path with then first node")
 		assert.Equal(t, &lastNode, path.Nodes[2], "Should have path ended by last node")
 	}
+}
+
+func TestWalkOnBinaryTree(t *testing.T) {
+	root := composition.NewCompositionRoot()
+
+	root.Build()
+
+	walker := root.ComposeWalker()
+	unexploredTree := root.ComposeTree()
+
+	path := walker.Walk(unexploredTree, &unexploredTree.Nodes[0], &unexploredTree.Nodes[len(unexploredTree.Nodes)-1])
+
+	assert.NotEmpty(t, path, "Should find a path")
+	assert.Less(t, 5, len(path.Nodes), "Should find a (not too) long path")
 }

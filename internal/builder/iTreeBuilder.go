@@ -4,6 +4,6 @@ import (
 	"tree-walker/model/tree"
 )
 
-type IBuilder interface {
+type ITreeBuilder interface {
 	BuildTree() *tree.Tree
 }
