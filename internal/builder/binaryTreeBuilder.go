@@ -19,9 +19,10 @@ func (b BinaryTreeBuilder) BuildTree() *tree.Tree {
 		return nil
 	}
 
-	builtTree := new(tree.Tree)
-	builtTree.Nodes = make([]tree.Node, b.nodeCount)
-	builtTree.Links = make([]tree.Link, b.nodeCount-1)
+	builtTree := &tree.Tree{
+		Nodes: make([]tree.Node, b.nodeCount),
+		Links: make([]tree.Link, b.nodeCount-1),
+	}
 	currentParentIndex := 0
 
 	for node := 0; node < b.nodeCount; node++ {
