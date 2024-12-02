@@ -20,19 +20,17 @@ func (b BinaryTreeBuilder) BuildTree() *tree.Tree {
 	}
 
 	builtTree := new(tree.Tree)
+	builtTree.Nodes = make([]tree.Node, b.nodeCount)
+	builtTree.Links = make([]tree.Link, b.nodeCount-1)
 	currentParentIndex := 0
-	firstLink := true
 
 	for node := 0; node < b.nodeCount; node++ {
-		builtTree.Nodes = append(builtTree.Nodes, tree.Node{ID: node})
+		builtTree.Nodes[node].ID = node
 
 		if node != 0 {
-			builtTree.Links = append(builtTree.Links, tree.Link{
-				Nodes: [2]*tree.Node{&builtTree.Nodes[currentParentIndex], &builtTree.Nodes[len(builtTree.Nodes)-1]},
-			})
+			builtTree.Links[node-1].Nodes = [2]*tree.Node{&builtTree.Nodes[currentParentIndex], &builtTree.Nodes[node]}
 
-			firstLink = !firstLink
-			if firstLink {
+			if node > 1 && builtTree.Links[node-2].Nodes[0] == &builtTree.Nodes[currentParentIndex] {
 				currentParentIndex++
 			}
 		}
