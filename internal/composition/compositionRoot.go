@@ -10,18 +10,20 @@ import (
 )
 
 type CompositionRoot struct {
-	singletons map[reflect.Type]interface{}
+	singletons          map[reflect.Type]interface{}
+	globalConfiguration *configuration.LaunchingConfiguration
 }
 
 func NewCompositionRoot(conf *configuration.LaunchingConfiguration) *CompositionRoot {
 	return &CompositionRoot{
-		singletons: make(map[reflect.Type]interface{}),
+		singletons:          make(map[reflect.Type]interface{}),
+		globalConfiguration: conf,
 	}
 }
 
 func (c CompositionRoot) Build() {
 	c.singletons[reflect.TypeFor[treeHelpers.INeighborFinder]()] = treeHelpers.NewNeighborFinder()
-	c.singletons[reflect.TypeFor[builder.ITreeBuilder]()] = builder.NewBinaryTreeBuilder(99)
+	c.singletons[reflect.TypeFor[builder.ITreeBuilder]()] = builder.NewBinaryTreeBuilder(int(c.globalConfiguration.NodeCount))
 }
 
 func (c CompositionRoot) ComposeWalker() walker.IWalker {

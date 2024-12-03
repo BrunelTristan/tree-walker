@@ -25,7 +25,7 @@ func TestComposeWalker(t *testing.T) {
 }
 
 func TestComposeTree(t *testing.T) {
-	conf := &configuration.LaunchingConfiguration{}
+	conf := &configuration.LaunchingConfiguration{NodeCount: 124}
 	root := NewCompositionRoot(conf)
 
 	root.Build()
@@ -33,4 +33,5 @@ func TestComposeTree(t *testing.T) {
 	christmasTree := root.ComposeTree()
 
 	assert.NotNil(t, christmasTree, "Should return built tree")
+	assert.Len(t, christmasTree.Nodes, 124, "Should be built with all nodes")
 }

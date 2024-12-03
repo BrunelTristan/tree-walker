@@ -9,7 +9,7 @@ import (
 )
 
 func TestWalkOnWerySimpleTree(t *testing.T) {
-	conf := &configuration.LaunchingConfiguration{}
+	conf := &configuration.LaunchingConfiguration{NodeCount: 10}
 	root := composition.NewCompositionRoot(conf)
 
 	root.Build()
@@ -45,7 +45,7 @@ func TestWalkOnWerySimpleTree(t *testing.T) {
 }
 
 func TestWalkOnBinaryTree(t *testing.T) {
-	conf := &configuration.LaunchingConfiguration{}
+	conf := &configuration.LaunchingConfiguration{NodeCount: 257}
 	root := composition.NewCompositionRoot(conf)
 
 	root.Build()
