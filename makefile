@@ -8,7 +8,7 @@ SRC2= $(filter-out $(wildcard $(SRCDIR)/*/*_test.go), $(SRC1))
 SRC= $(filter-out $(wildcard $(SRCDIR)/*/*/*_test.go), $(SRC2))
 INTERFACE_FILES=$(wildcard $(SRCDIR)/*/*/i[A-Z]*.go $(SRCDIR)/*/i[A-Z]*.go $(SRCDIR)/i[A-Z]*.go)
 TEST_PACKAGE_WITHOUT_COVERAGE=tree-walker/integrationTests
-EXCLUDED_PACKAGE_FOR_BENCHMARK=$(shell go list ./... | grep -v generatedMocks | grep -v model/tree)
+EXCLUDED_PACKAGE_FOR_BENCHMARK=$(shell go list ./... | grep -v generatedMocks | grep -v model/)
 EXCLUDED_PACKAGE_FOR_COVERAGE=$(filter-out $(TEST_PACKAGE_WITHOUT_COVERAGE), $(EXCLUDED_PACKAGE_FOR_BENCHMARK))
 
 .PHONY: all clear 

@@ -5,6 +5,7 @@ import (
 	"tree-walker/internal/builder"
 	"tree-walker/internal/treeHelpers"
 	"tree-walker/internal/walker"
+	"tree-walker/model/configuration"
 	"tree-walker/model/tree"
 )
 
@@ -12,7 +13,7 @@ type CompositionRoot struct {
 	singletons map[reflect.Type]interface{}
 }
 
-func NewCompositionRoot() *CompositionRoot {
+func NewCompositionRoot(conf *configuration.LaunchingConfiguration) *CompositionRoot {
 	return &CompositionRoot{
 		singletons: make(map[reflect.Type]interface{}),
 	}

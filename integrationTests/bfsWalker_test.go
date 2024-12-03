@@ -4,11 +4,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"tree-walker/internal/composition"
+	"tree-walker/model/configuration"
 	"tree-walker/model/tree"
 )
 
 func TestWalkOnWerySimpleTree(t *testing.T) {
-	root := composition.NewCompositionRoot()
+	conf := &configuration.LaunchingConfiguration{}
+	root := composition.NewCompositionRoot(conf)
 
 	root.Build()
 
@@ -43,7 +45,8 @@ func TestWalkOnWerySimpleTree(t *testing.T) {
 }
 
 func TestWalkOnBinaryTree(t *testing.T) {
-	root := composition.NewCompositionRoot()
+	conf := &configuration.LaunchingConfiguration{}
+	root := composition.NewCompositionRoot(conf)
 
 	root.Build()
 
