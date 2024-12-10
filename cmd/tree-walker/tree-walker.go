@@ -7,14 +7,35 @@ import (
 	"tree-walker/model/configuration"
 )
 
-func main() {
-	fmt.Println("WALK")
+const (
+	major = 0
+	minor = 0
+	patch = 0
+)
 
-	conf := &configuration.LaunchingConfiguration{}
+func readFlags() (shouldDisplayVersion bool, conf *configuration.LaunchingConfiguration) {
+	conf = &configuration.LaunchingConfiguration{}
 	flag.UintVar(&conf.NodeCount, "nodes", 30, "nodes count in the tree")
+	shouldDisplayVersion = *flag.Bool("v", false, "display version")
 
 	flag.Parse()
 
+	return
+}
+
+func launch(shouldDisplayVersion bool, conf *configuration.LaunchingConfiguration) {
+	if shouldDisplayVersion {
+		displayVersion()
+	} else {
+		launchWalk(conf)
+	}
+}
+
+func displayVersion() {
+	fmt.Printf("V%d.%d.%d\n", major, minor, patch)
+}
+
+func launchWalk(conf *configuration.LaunchingConfiguration) {
 	root := composition.NewCompositionRoot(conf)
 	root.Build()
 
@@ -25,4 +46,10 @@ func main() {
 
 	fmt.Printf("Path from Node %d to %d is ", tree.Nodes[0].ID, tree.Nodes[len(tree.Nodes)-1].ID)
 	fmt.Println(path)
+}
+
+func main() {
+	shouldDisplayVersion, conf := readFlags()
+
+	launch(shouldDisplayVersion, conf)
 }
