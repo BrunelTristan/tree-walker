@@ -54,7 +54,7 @@ test-branch-master:
 	TAG_ON_COMMIT=`git tag --contains $$HASH_COMMIT | grep -E "^V[0-9]+\.[0-9]+\.[0-9]+$\" | cut -c2-`; \
 	echo $$TAG_ON_COMMIT; \
 	if [ -z $$TAG_ON_COMMIT ]; then exit "Last commit missed a version tag"; fi; \
-	VERSION_UPDATED=`git diff-tree --no-commit-id --name-only -r $$HASH_COMMIT | grep Version.h`; \
+	VERSION_UPDATED=`git diff-tree --no-commit-id --name-only -r $$HASH_COMMIT | grep tree-walker.go`; \
 	if [ -z $$VERSION_UPDATED ]; then exit "No new verson on last commit"; fi; \
 	
 test-release-version: $(EXEC)
