@@ -23,8 +23,9 @@ RUN go install go.uber.org/mock/mockgen@latest
 
 WORKDIR /src
 
-CMD ["make"]
+RUN git config --global --add safe.directory /src
 
+CMD ["make"]
 
 # -----------------------------------------------------------------------------
 # Execution
