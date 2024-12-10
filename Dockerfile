@@ -12,7 +12,7 @@ WORKDIR /src
 # builder Env
 FROM socle as builder
 
-RUN apk add make
+RUN apk add make git
 
 # Add go lang linter
 WORKDIR /usr/lib/go
