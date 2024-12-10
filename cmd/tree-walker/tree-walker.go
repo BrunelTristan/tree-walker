@@ -53,3 +53,9 @@ func main() {
 
 	launch(shouldDisplayVersion, conf)
 }
+
+// TODO : change walker to walk along all the tree (with a functor)
+// TODO : create a path finder
+// TODO : immplement DFS
+// TODO : manage weighted links
+// TODO : implement IsConvex
