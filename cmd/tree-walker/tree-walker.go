@@ -54,6 +54,7 @@ func main() {
 	launch(shouldDisplayVersion, conf)
 }
 
+// TODO : implement concurrent BFS with go routine to explore each floor concurrently (check benchmark)
 // TODO : change walker to walk along all the tree (with a functor)
 // TODO : create a path finder
 // TODO : immplement DFS
